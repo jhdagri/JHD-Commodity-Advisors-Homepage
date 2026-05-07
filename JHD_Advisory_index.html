@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JHD Commodity Advisors — Agricultural Commodity Advisory</title>
+<meta name="description" content="JHD Commodity Advisors provides specialist hedging advisory, physical commodity broking, and agricultural market research services.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:     #090b0e;
+  --card:   #11141b;
+  --card2:  #181d28;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --text:   #e8eaf0;
+  --muted:  #8890a4;
+  --muted2: #4a5268;
+  --gold:   #e8b84b;
+  --gold2:  #c9962e;
+  --gold-lt:#f5d07a;
+  --blue:   #4a9eff;
+  --teal:   #2ecfaa;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===================== UTILITY ===================== */
+.gold  { color: var(--gold); }
+.muted { color: var(--muted); }
+.serif { font-family: 'DM Serif Display', serif; }
+.mono  { font-family: 'DM Mono', monospace; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.18s;
+}
+.btn-gold    { background: var(--gold); color: #090b0e; }
+.btn-gold:hover { background: var(--gold-lt); }
+.btn-ghost   { background: transparent; border: 1px solid var(--border2); color: var(--muted); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+.btn-outline:hover { background: rgba(232,184,75,0.08); }
+
+/* ===================== TOPNAV ===================== */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 68px;
+  background: rgba(9,11,14,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo {
+  width: 36px; height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+.nav-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.nav-name span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--text); }
+.nav-bushel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  background: rgba(232,184,75,0.1);
+  border: 1px solid rgba(232,184,75,0.3);
+  border-radius: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-decoration: none;
+  transition: all 0.18s;
+}
+.nav-bushel-btn:hover { background: rgba(232,184,75,0.16); border-color: var(--gold); }
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232,184,75,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(74,158,255,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 56px;
+  line-height: 1.08;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.hero-h1 em { color: var(--gold); font-style: italic; }
+.hero-desc {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Hero right — stat card */
+.hero-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold2), var(--gold-lt));
+}
+.hsc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted2);
+  margin-bottom: 20px;
+}
+.hsc-stat {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.hsc-stat:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.hsc-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hsc-val span { color: var(--gold); }
+.hsc-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.hsc-disclaimer {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  color: var(--muted2);
+  margin-top: 20px;
+  line-height: 1.55;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ===================== SECTION COMMON ===================== */
+.section {
+  padding: 96px 40px;
+  position: relative;
+}
+.section-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+.section-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+.section-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 40px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.section-h2 em { color: var(--gold); font-style: italic; }
+.section-intro {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+/* ===================== SERVICES ===================== */
+#services { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.service-card {
+  background: var(--bg);
+  padding: 36px 40px;
+  position: relative;
+  transition: background 0.2s;
+}
+.service-card:hover { background: var(--card2); }
+.service-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.service-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 20px;
+}
+.service-icon.gold { background: rgba(232,184,75,0.08); }
+.service-icon.blue { background: rgba(74,158,255,0.08); }
+.service-icon.teal { background: rgba(46,207,170,0.08); }
+.service-icon.coral { background: rgba(255,107,74,0.08); }
+.service-h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.service-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.service-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.tag-gold  { background: rgba(232,184,75,0.1); color: var(--gold); border: 1px solid rgba(232,184,75,0.2); }
+.tag-blue  { background: rgba(74,158,255,0.1); color: var(--blue); border: 1px solid rgba(74,158,255,0.2); }
+.tag-teal  { background: rgba(46,207,170,0.1); color: var(--teal); border: 1px solid rgba(46,207,170,0.2); }
+.sub-service {
+  margin-top: 20px;
+  padding: 16px 18px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+}
+.sub-service-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.sub-service-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+/* ===================== ABOUT ===================== */
+#about { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-photo-wrap {
+  position: relative;
+}
+.about-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted2);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.about-photo-placeholder svg { opacity: 0.3; }
+.about-credential-strip {
+  position: absolute;
+  bottom: -1px; left: -1px; right: -1px;
+  background: linear-gradient(0deg, rgba(9,11,14,0.95) 0%, transparent 100%);
+  padding: 24px 20px 20px;
+  border-radius: 0 0 12px 12px;
+}
+.about-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.about-title-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.about-content {}
+.about-bio {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.about-bio p { margin-bottom: 16px; }
+.about-bio p:last-child { margin-bottom: 0; }
+.credentials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
+.cred-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.cred-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.cred-val span { color: var(--gold); }
+.cred-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4; }
+
+/* ===================== THE BUSHEL BAND ===================== */
+.bushel-band {
+  padding: 96px 40px;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.bushel-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,184,75,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bushel-band-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: center;
+}
+.bushel-band-left {}
+.bushel-band-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.bushel-band-wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--text);
+}
+.bushel-band-wordmark span { color: var(--gold); }
+.bushel-band-byline {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 2px;
+}
+.bushel-band-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.bushel-band-h2 em { color: var(--gold); font-style: italic; }
+.bushel-band-desc { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+.bushel-feature-row { display: flex; flex-direction: column; gap: 14px; }
+.bushel-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+.bushel-feature::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.bushel-feature strong { color: var(--text); font-weight: 500; }
+.bushel-band-card {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.bbc-top {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(232,184,75,0.06) 0%, transparent 100%);
+}
+.bbc-top-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 10px;
+}
+.bbc-stat-row { display: flex; gap: 20px; }
+.bbc-stat { text-align: center; }
+.bbc-stat-val { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); }
+.bbc-stat-lbl { font-family: 'DM Mono', monospace; font-size: 8px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.bbc-body { padding: 20px 24px; }
+.bbc-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+.bbc-item:last-child { border-bottom: none; }
+.bbc-item-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.dot-green  { background: #22c55e; }
+.dot-gold   { background: var(--gold); }
+.dot-blue   { background: var(--blue); }
+.bbc-cta { padding: 0 24px 24px; }
+
+/* ===================== CONTACT ===================== */
+#contact { background: var(--bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-info {}
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-info-item:last-child { border-bottom: none; }
+.contact-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-info-label { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted2); margin-bottom: 4px; }
+.contact-info-val { font-size: 15px; color: var(--text); text-decoration: none; }
+.contact-info-val:hover { color: var(--gold); }
+.contact-info-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+.contact-form {}
+.form-row { margin-bottom: 16px; }
+.form-row label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+.form-row input, .form-row textarea, .form-row select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  font-size: 14.5px;
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--gold); }
+.form-row input::placeholder, .form-row textarea::placeholder { color: var(--muted2); }
+.form-row textarea { resize: vertical; min-height: 130px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-submit { width: 100%; padding: 14px; margin-top: 4px; font-size: 13px; }
+.form-msg { font-family: 'DM Mono', monospace; font-size: 11px; margin-top: 12px; padding: 10px 14px; border-radius: 6px; display: none; }
+.form-msg.ok  { background: rgba(46,207,170,0.08); border: 1px solid rgba(46,207,170,0.25); color: var(--teal); }
+.form-msg.err { background: rgba(255,107,74,0.08); border: 1px solid rgba(255,107,74,0.25); color: #ff6b4a; }
+
+/* ===================== FOOTER ===================== */
+.footer {
+  padding: 48px 40px 36px;
+  background: #060809;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand {}
+.footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); }
+.footer-brand-name span { color: var(--gold); }
+.footer-brand-desc { font-size: 13.5px; color: var(--muted2); line-height: 1.7; }
+.footer-col-title { font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted2); margin-bottom: 16px; }
+.footer-link { display: block; font-size: 14px; color: var(--muted); text-decoration: none; margin-bottom: 10px; transition: color 0.15s; }
+.footer-link:hover { color: var(--gold); }
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); }
+.footer-disclaimer { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); max-width: 480px; text-align: right; line-height: 1.55; }
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+.hero-h1       { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+.hero-desc     { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+.hero-actions  { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+.hero-stat-card{ animation: fadeUp 0.7s ease both; animation-delay: 0.35s; }
+
+/* ===================== MOBILE ===================== */
+@media(max-width:900px){
+  .topnav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-h1 { font-size: 38px; }
+  .hero-stat-card { display: none; }
+  .section { padding: 64px 20px; }
+  .section-h2 { font-size: 30px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo-placeholder { aspect-ratio: 4/3; }
+  .credentials-grid { grid-template-columns: 1fr 1fr; }
+  .bushel-band { padding: 64px 20px; }
+  .bushel-band-inner { grid-template-columns: 1fr; gap: 40px; }
+  .bushel-band-h2 { font-size: 28px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-disclaimer { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= NAV ========================= -->
+<nav class="topnav">
+  <a class="nav-brand" href="#">
+    <img class="nav-logo" src="https://i.ibb.co/PZPZGP71/IMG-2924.jpg" alt="JHD">
+    <div>
+      <div class="nav-name">JHD <span>Commodity Advisors</span></div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#services">Services</a>
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#contact">Contact</a>
+    <a class="nav-bushel-btn" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 30 30" fill="none"><path d="M15 28V14" stroke="#e8b84b" stroke-width="2.2" stroke-linecap="round"/><path d="M15 14C15 14 10 11.5 10 7a5 5 0 0 1 10 0c0 4.5-5 7-5 7z" fill="rgba(232,184,75,0.25)" stroke="#e8b84b" stroke-width="2"/></svg>
+      The Bushel
+    </a>
+  </div>
+</nav>
+
+<!-- ========================= HERO ========================= -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-line" style="left:33.3%;"></div>
+  <div class="hero-grid-line" style="left:66.6%;"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Agricultural Commodity Advisory</div>
+      <h1 class="hero-h1">Specialist advice<br>for complex <em>markets</em></h1>
+      <p class="hero-desc">JHD Commodity Advisors provides independent hedging advisory, physical commodity broking and proprietary market research to producers, processors, traders and institutions across the global agricultural supply chain.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#contact">Get in Touch &rarr;</a>
+        <a class="btn btn-ghost" href="#services">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hsc-label">JHD Commodity Advisors &mdash; At a Glance</div>
+      <div class="hsc-stat">
+        <div class="hsc-val">15<span>+</span></div>
+        <div class="hsc-desc">Years across physical trading, derivatives portfolio management and commodity broking</div>
+      </div>
+      <div class="hsc-stat">
+        <div class="hsc-val">4<span>th</span></div>
+        <div class="hsc-desc">Generation farming background &mdash; ground-level understanding of production risk</div>
+      </div>
+      <div class="hsc-stat">
+        <div class="hsc-val">Global</div>
+        <div class="hsc-desc">Counterparty network across Europe, Black Sea, MENA and the Americas</div>
+      </div>
+      <div class="hsc-disclaimer">This site is informational only. Nothing constitutes investment advice or a recommendation to trade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SERVICES ========================= -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-h2">Services</h2>
+    <p class="section-intro">Independent, conflict-free advisory across the full commodity risk spectrum. We work alongside producers, processors and trading firms to structure and execute strategies that protect margins and create opportunity.</p>
+
+    <div class="services-grid">
+
+      <!-- 1 -->
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon gold">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="service-h3">Commodity Hedging Advisory</h3>
+        <p class="service-desc">Bespoke price risk management strategy for agricultural producers, processors and end users. We assess your exposure, design a hedging framework that fits your commercial objectives, and provide ongoing oversight across futures, options and OTC instruments.</p>
+        <div>
+          <span class="service-tag tag-gold">Price Risk</span>
+          <span class="service-tag tag-gold">Futures & Options</span>
+          <span class="service-tag tag-gold">Strategy Design</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="service-h3">Physical Commodity Broking</h3>
+        <p class="service-desc">Cargo broking across grains and oilseeds — origin sourcing, destination procurement, FOB and CIF structures. We act as an intermediary between buyers, sellers and shippers, leveraging an extensive counterparty network built across 15 years in the physical market.</p>
+        <div>
+          <span class="service-tag tag-blue">Grains</span>
+          <span class="service-tag tag-blue">Oilseeds</span>
+          <span class="service-tag tag-blue">Cargo FOB / CIF</span>
+        </div>
+        <div class="sub-service">
+          <div class="sub-service-title">Introducing Broking</div>
+          <div class="sub-service-desc">Client introductions to OTC and listed derivatives execution venues and liquidity providers. For clients seeking access to derivative markets without an existing broker relationship.</div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon teal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2ecfaa" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3 class="service-h3">Market Research & Commentary</h3>
+        <p class="service-desc">Proprietary weekly market commentary covering CBOT, MATIF, KCBT and BMU wheat alongside corn, soybeans and soft commodities. CFTC positioning analysis, WASDE breakdowns, spread analysis and export sales data — delivered through The Bushel platform.</p>
+        <div>
+          <span class="service-tag tag-teal">CBOT / MATIF</span>
+          <span class="service-tag tag-teal">CFTC Analysis</span>
+          <span class="service-tag tag-teal">Weekly Commentary</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon coral" style="border-color:rgba(255,107,74,0.2);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b4a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3 class="service-h3">Discretionary Trading Advisory</h3>
+        <p class="service-desc">Bespoke managed account strategy and ongoing oversight for qualified clients. Combining fundamental commodity analysis with disciplined risk management and systematic calendar spread strategies across CBOT grain and oilseed markets.</p>
+        <div>
+          <span class="service-tag" style="background:rgba(255,107,74,0.08);color:#ff6b4a;border:1px solid rgba(255,107,74,0.2);">Managed Accounts</span>
+          <span class="service-tag" style="background:rgba(255,107,74,0.08);color:#ff6b4a;border:1px solid rgba(255,107,74,0.2);">Calendar Spreads</span>
+          <span class="service-tag" style="background:rgba(255,107,74,0.08);color:#ff6b4a;border:1px solid rgba(255,107,74,0.2);">Risk Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================= ABOUT ========================= -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow">About</div>
+    <h2 class="section-h2">James Day</h2>
+
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Photo placeholder
+        </div>
+        <div class="about-credential-strip">
+          <div class="about-name">James Day</div>
+          <div class="about-title-tag">Founder &mdash; JHD Commodity Advisors</div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="about-bio">
+          <p>James Day is an agricultural commodity professional with over 15 years of experience spanning physical bulk vessel grain trading, futures and options portfolio management, and commodity broking across global grain and oilseed markets.</p>
+          <p>A fourth-generation farmer, James brings ground-level production knowledge to his market analysis — an informational edge that institutional backgrounds rarely carry. His career has included managing grain procurement for one of the world's largest flour mills, running a discretionary commodity derivatives portfolio, and senior broking roles covering CBOT, MATIF, KCBT and Black Sea grain markets.</p>
+          <p>JHD Commodity Advisors was established to provide independent, commercially-driven advisory to producers, processors and trading firms who require specialist guidance without the conflicts inherent in bank or broker-led advice.</p>
+        </div>
+
+        <div class="credentials-grid">
+          <div class="cred-card">
+            <div class="cred-val">15<span>+</span></div>
+            <div class="cred-label">Years in agricultural commodity markets</div>
+          </div>
+          <div class="cred-card">
+            <div class="cred-val">4<span>th</span></div>
+            <div class="cred-label">Generation wheat farming background</div>
+          </div>
+          <div class="cred-card">
+            <div class="cred-val">Global</div>
+            <div class="cred-label">Network across Europe, Black Sea, MENA, Americas</div>
+          </div>
+          <div class="cred-card">
+            <div class="cred-val">NFA</div>
+            <div class="cred-label">Series 3 qualified — futures and options</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= THE BUSHEL ========================= -->
+<div class="bushel-band">
+  <div class="bushel-band-inner" style="grid-template-columns:1fr;max-width:1100px;">
+
+    <!-- Header row -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:52px;">
+      <div>
+        <div class="bushel-band-logo">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="31" fill="rgba(232,184,75,0.07)" stroke="rgba(232,184,75,0.2)" stroke-width="1"/>
+            <path d="M32 54V30" stroke="#e8b84b" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M32 30C32 30 23 25.5 23 17a9 9 0 0 1 18 0c0 8.5-9 13-9 13z" fill="rgba(232,184,75,0.15)" stroke="#e8b84b" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M22 46C19 45 16 42 16 37" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M42 46C45 45 48 42 48 37" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="bushel-band-wordmark">The <span>Bushel</span></div>
+            <div class="bushel-band-byline">by JHD Commodity Advisors &nbsp;&middot;&nbsp; Agricultural Research &amp; Hedging Services</div>
+          </div>
+        </div>
+        <h2 class="bushel-band-h2" style="margin-top:20px;">Harvesting the power of <em>people</em></h2>
+        <p class="bushel-band-desc" style="max-width:640px;">Professional agricultural market intelligence, built on the collective knowledge of the trading community. Contribute, engage and unlock premium research &mdash; <em style="color:var(--gold);">you reap what you sow.</em></p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding-top:8px;">
+        <a class="btn btn-gold" href="https://thebushel.jhdcommodityadvisors.com" target="_blank" style="font-size:13px;padding:13px 28px;">Create Free Account &rarr;</a>
+        <a class="btn btn-ghost" href="https://thebushel.jhdcommodityadvisors.com" target="_blank" style="font-size:12px;">Sign In to The Bushel</a>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);text-align:center;width:100%;">Free to join &mdash; 50 bu welcome bonus</div>
+      </div>
+    </div>
+
+    <!-- Feature grid -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 30 30" fill="none"><path d="M15 28V14" stroke="#4a9eff" stroke-width="2.2" stroke-linecap="round"/><path d="M15 14C15 14 10 11.5 10 7a5 5 0 0 1 10 0c0 4.5-5 7-5 7z" fill="rgba(74,158,255,0.2)" stroke="#4a9eff" stroke-width="2"/><path d="M9 22C7.5 21.5 6 20 6 17" stroke="#4a9eff" stroke-width="1.6" stroke-linecap="round"/><path d="M21 22C22.5 21.5 24 20 24 17" stroke="#4a9eff" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Earn Bushels</div>
+        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">JHD's internal currency rewards participation. Earn <strong style="color:var(--gold);">Bushels</strong> every time you comment, share a trade idea or submit a crop report. New members receive a <strong style="color:var(--gold);">50 bu welcome bonus</strong> on sign-up.</p>
+      </div>
+
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:rgba(232,184,75,0.1);border:1px solid rgba(232,184,75,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Unlock Premium Research</div>
+        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Spend Bushels to access in-depth research and market commentary, options flow analysis, FOB pricing data, freight indices and proprietary WASDE breakdowns. The more you contribute, the more you unlock &mdash; <strong style="color:var(--gold);">For Free</strong>.</p>
+      </div>
+
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:rgba(46,207,170,0.1);border:1px solid rgba(46,207,170,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ecfaa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Rise Through the Ranks</div>
+        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Progress from <strong style="color:var(--gold);">Merchandiser</strong> through <strong style="color:var(--gold);">Originator</strong>, <strong style="color:var(--gold);">Risk Manager</strong> and <strong style="color:var(--gold);">Head of Desk</strong> to <strong style="color:var(--gold);">Market Maker</strong> as your Bushel balance grows. Higher levels unlock discounts and early access.</p>
+      </div>
+
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,107,74,0.08);border:1px solid rgba(255,107,74,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b4a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Community Sentiment</div>
+        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Tap into the <strong style="color:var(--gold);">collective intelligence</strong> of grain traders, merchandisers and analysts. Price calls, crop condition votes and directional surveys aggregate in real time across the community.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========================= CONTACT ========================= -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="section-h2">Contact</h2>
+    <p class="section-intro">For hedging advisory, broking enquiries or research subscriptions, get in touch directly. All enquiries are handled personally.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <a class="contact-info-val" href="mailto:james@jhdcommodityadvisors.com">james@jhdcommodityadvisors.com</a>
+            <div class="contact-info-sub">Typically responds within one business day</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">LinkedIn</div>
+            <a class="contact-info-val" href="YOUR_LINKEDIN_URL_HERE" target="_blank">James Day</a>
+            <div class="contact-info-sub">Connect for market updates and commentary</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2ecfaa" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-val" style="cursor:default;">London, United Kingdom</div>
+            <div class="contact-info-sub">Available for meetings in London and remotely</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 30 30" fill="none"><path d="M15 28V14" stroke="#e8b84b" stroke-width="2" stroke-linecap="round"/><path d="M15 14C15 14 10 11.5 10 7a5 5 0 0 1 10 0c0 4.5-5 7-5 7z" fill="rgba(232,184,75,0.2)" stroke="#e8b84b" stroke-width="1.8"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Research Platform</div>
+            <a class="contact-info-val" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">thebushel.jhdcommodityadvisors.com</a>
+            <div class="contact-info-sub">Free to join &mdash; weekly market commentary and data</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div class="form-row" style="margin-bottom:0;">
+            <label>First Name</label>
+            <input type="text" id="cf-fname" placeholder="James">
+          </div>
+          <div class="form-row" style="margin-bottom:0;">
+            <label>Last Name</label>
+            <input type="text" id="cf-lname" placeholder="Day">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" id="cf-email" placeholder="you@company.com">
+        </div>
+        <div class="form-row">
+          <label>Company / Organisation</label>
+          <input type="text" id="cf-company" placeholder="e.g. Viterra, Cargill, independent">
+        </div>
+        <div class="form-row">
+          <label>Enquiry Type</label>
+          <select id="cf-type">
+            <option value="">Select...</option>
+            <option>Hedging Advisory</option>
+            <option>Physical Commodity Broking</option>
+            <option>Introducing Broking</option>
+            <option>Discretionary Trading Advisory</option>
+            <option>Market Research / The Bushel</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Message</label>
+          <textarea id="cf-message" placeholder="Brief description of what you're looking for..."></textarea>
+        </div>
+        <button class="btn btn-gold form-submit" onclick="submitContactForm()">Send Enquiry &rarr;</button>
+        <div class="form-msg" id="cf-msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-row">
+        <img src="https://i.ibb.co/PZPZGP71/IMG-2924.jpg" alt="JHD" style="width:28px;height:28px;border-radius:4px;object-fit:contain;">
+        <div class="footer-brand-name">JHD <span>Commodity Advisors</span></div>
+      </div>
+      <p class="footer-brand-desc">Independent agricultural commodity advisory. Hedging, broking, research and discretionary trading strategy.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <a class="footer-link" href="#services">Hedging Advisory</a>
+      <a class="footer-link" href="#services">Physical Commodity Broking</a>
+      <a class="footer-link" href="#services">Introducing Broking</a>
+      <a class="footer-link" href="#services">Market Research</a>
+      <a class="footer-link" href="#services">Discretionary Advisory</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Links</div>
+      <a class="footer-link" href="#about">About James Day</a>
+      <a class="footer-link" href="#contact">Contact</a>
+      <a class="footer-link" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">The Bushel Platform</a>
+      <a class="footer-link" href="YOUR_LINKEDIN_URL_HERE" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 JHD Commodity Advisors &mdash; All rights reserved</div>
+    <div class="footer-disclaimer">This website is for informational purposes only. Nothing on this site constitutes investment advice, a recommendation to trade, or an offer to buy or sell any financial instrument. Commodity trading involves substantial risk of loss.</div>
+  </div>
+</footer>
+
+<script>
+async function submitContactForm(){
+  var fname   = document.getElementById('cf-fname').value.trim();
+  var lname   = document.getElementById('cf-lname').value.trim();
+  var email   = document.getElementById('cf-email').value.trim();
+  var company = document.getElementById('cf-company').value.trim();
+  var type    = document.getElementById('cf-type').value;
+  var message = document.getElementById('cf-message').value.trim();
+  var msgEl   = document.getElementById('cf-msg');
+
+  if(!fname||!email||!message){
+    msgEl.textContent = 'Please fill in your name, email and message.';
+    msgEl.className = 'form-msg err';
+    msgEl.style.display = 'block';
+    return;
+  }
+  if(message.length < 20){
+    msgEl.textContent = 'Please provide a bit more detail in your message.';
+    msgEl.className = 'form-msg err';
+    msgEl.style.display = 'block';
+    return;
+  }
+
+  var btn = document.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    var resp = await fetch('/.netlify/functions/contact', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({fname:fname, lname:lname, email:email, company:company, type:type, message:message})
+    });
+    if(resp.ok){
+      msgEl.textContent = 'Message sent. James will be in touch shortly.';
+      msgEl.className = 'form-msg ok';
+      msgEl.style.display = 'block';
+      ['cf-fname','cf-lname','cf-email','cf-company','cf-message'].forEach(function(id){ document.getElementById(id).value=''; });
+      document.getElementById('cf-type').value='';
+    } else {
+      throw new Error('Send failed');
+    }
+  } catch(e){
+    msgEl.textContent = 'Could not send at this moment. Please email james@jhdcommodityadvisors.com directly.';
+    msgEl.className = 'form-msg err';
+    msgEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send Enquiry \u2192';
+}
+</script>
+</body>
+</html>
