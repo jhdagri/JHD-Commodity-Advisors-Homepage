@@ -24,7 +24,7 @@
   --teal:   #2ecfaa;
 }
 
-html { scroll-behavior: smooth; }
+html {}
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
@@ -130,7 +130,14 @@ body {
 }
 .nav-bushel-btn:hover { background: rgba(232,184,75,0.16); border-color: var(--gold); }
 
-/* ===================== HERO ===================== */
+
+/* ===== TAB NAVIGATION ===== */
+.nav-link { cursor:pointer; }
+.nav-link.active { color:var(--text); }
+.page-section { display:none; }
+.page-section.active { display:block; }
+
+    /* ===================== HERO ===================== */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -688,9 +695,10 @@ body {
     </div>
   </a>
   <div class="nav-links">
-    <a class="nav-link" href="#services">Services</a>
-    <a class="nav-link" href="#about">About</a>
-    <a class="nav-link" href="#contact">Contact</a>
+    <span class="nav-link" onclick="showSection('services')">Services</span>
+    <span class="nav-link" onclick="showSection('about')">About</span>
+    <span class="nav-link" onclick="showSection('contact')">Contact</span>
+    <span class="nav-link" onclick="showSection('bushel')">The Bushel</span>
     <a class="nav-bushel-btn" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">
       <svg width="14" height="14" viewBox="0 0 30 30" fill="none"><path d="M15 28V14" stroke="#e8b84b" stroke-width="2.2" stroke-linecap="round"/><path d="M15 14C15 14 10 11.5 10 7a5 5 0 0 1 10 0c0 4.5-5 7-5 7z" fill="rgba(232,184,75,0.25)" stroke="#e8b84b" stroke-width="2"/></svg>
       The Bushel
@@ -699,6 +707,7 @@ body {
 </nav>
 
 <!-- ========================= HERO ========================= -->
+<div class="page-section active" id="section-home">
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid-line" style="left:33.3%;"></div>
@@ -709,8 +718,8 @@ body {
       <h1 class="hero-h1">Specialist advice<br>for complex <em>markets</em></h1>
       <p class="hero-desc">JHD Commodity Advisors provides independent hedging advisory, physical commodity broking and proprietary market research to producers, processors, traders and institutions across the global agricultural supply chain.</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="#contact">Get in Touch &rarr;</a>
-        <a class="btn btn-ghost" href="#services">Our Services</a>
+        <button class="btn btn-gold" onclick="showSection('contact')">Get in Touch &rarr;</button>
+        <button class="btn btn-ghost" onclick="showSection('services')">Our Services</button>
       </div>
     </div>
     <div class="hero-stat-card">
@@ -732,7 +741,10 @@ body {
   </div>
 </section>
 
+</div>
+
 <!-- ========================= SERVICES ========================= -->
+<div class="page-section" id="section-services">
 <section class="section" id="services">
   <div class="section-inner">
     <div class="section-eyebrow">What We Do</div>
@@ -809,7 +821,10 @@ body {
   </div>
 </section>
 
+</div>
+
 <!-- ========================= ABOUT ========================= -->
+<div class="page-section" id="section-about">
 <section class="section" id="about">
   <div class="section-inner">
     <div class="section-eyebrow">About</div>
@@ -857,7 +872,10 @@ body {
   </div>
 </section>
 
+</div>
+
 <!-- ========================= THE BUSHEL ========================= -->
+<div class="page-section" id="section-bushel">
 <div class="bushel-band">
   <div class="bushel-band-inner" style="grid-template-columns:1fr;max-width:1100px;">
 
@@ -890,43 +908,59 @@ body {
     <!-- Feature grid -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
 
-      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:26px 22px;">
         <div style="width:44px;height:44px;border-radius:10px;background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
           <svg width="20" height="20" viewBox="0 0 30 30" fill="none"><path d="M15 28V14" stroke="#4a9eff" stroke-width="2.2" stroke-linecap="round"/><path d="M15 14C15 14 10 11.5 10 7a5 5 0 0 1 10 0c0 4.5-5 7-5 7z" fill="rgba(74,158,255,0.2)" stroke="#4a9eff" stroke-width="2"/><path d="M9 22C7.5 21.5 6 20 6 17" stroke="#4a9eff" stroke-width="1.6" stroke-linecap="round"/><path d="M21 22C22.5 21.5 24 20 24 17" stroke="#4a9eff" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Earn Bushels</div>
-        <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">JHD's internal currency rewards participation. Earn <strong style="color:var(--gold);">Bushels</strong> every time you comment, share a trade idea or submit a crop report. New members receive a <strong style="color:var(--gold);">50 bu welcome bonus</strong> on sign-up.</p>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:10px;">Earn Bushels</div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.75;">JHD's internal currency rewards participation. Earn <strong style="color:var(--gold);">Bushels</strong> every time you comment on a post, share a trade idea, submit a crop report or log in daily. New members receive a <strong style="color:var(--gold);">50 bu welcome bonus</strong> on sign-up &mdash; enough to unlock your first premium post immediately.</p>
       </div>
 
-      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:26px 22px;">
         <div style="width:44px;height:44px;border-radius:10px;background:rgba(232,184,75,0.1);border:1px solid rgba(232,184,75,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Unlock Premium Research</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:10px;">Unlock Premium Research</div>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Spend Bushels to access in-depth research and market commentary, options flow analysis, FOB pricing data, freight indices and proprietary WASDE breakdowns. The more you contribute, the more you unlock &mdash; <strong style="color:var(--gold);">For Free</strong>.</p>
       </div>
 
-      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:26px 22px;">
         <div style="width:44px;height:44px;border-radius:10px;background:rgba(46,207,170,0.1);border:1px solid rgba(46,207,170,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ecfaa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Rise Through the Ranks</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:10px;">Rise Through the Ranks</div>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Progress from <strong style="color:var(--gold);">Merchandiser</strong> through <strong style="color:var(--gold);">Originator</strong>, <strong style="color:var(--gold);">Risk Manager</strong> and <strong style="color:var(--gold);">Head of Desk</strong> to <strong style="color:var(--gold);">Market Maker</strong> as your Bushel balance grows. Higher levels unlock discounts and early access.</p>
       </div>
 
-      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px 22px;">
+      <div style="background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:26px 22px;">
         <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,107,74,0.08);border:1px solid rgba(255,107,74,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b4a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:8px;">Community Sentiment</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:10px;">Community Sentiment</div>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.7;">Tap into the <strong style="color:var(--gold);">collective intelligence</strong> of grain traders, merchandisers and analysts. Price calls, crop condition votes and directional surveys aggregate in real time across the community.</p>
       </div>
 
     </div>
+
+    <!-- Bottom CTA strip -->
+    <div style="margin-top:36px;background:var(--bg);border:1px solid rgba(232,184,75,0.2);border-radius:10px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);margin-bottom:4px;">Ready to join the community?</div>
+        <div style="font-size:14px;color:var(--muted);">Free to join. 50 Bushels credited on sign-up. No credit card required.</div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn btn-gold" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">Create Free Account &rarr;</a>
+        <a class="btn btn-ghost" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">Sign In</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
+</div>
+
 <!-- ========================= CONTACT ========================= -->
+<div class="page-section" id="section-contact">
 <section class="section" id="contact">
   <div class="section-inner">
     <div class="section-eyebrow">Get in Touch</div>
@@ -1019,6 +1053,8 @@ body {
   </div>
 </section>
 
+</div>
+
 <!-- ========================= FOOTER ========================= -->
 <footer class="footer">
   <div class="footer-inner">
@@ -1031,16 +1067,16 @@ body {
     </div>
     <div>
       <div class="footer-col-title">Services</div>
-      <a class="footer-link" href="#services">Hedging Advisory</a>
-      <a class="footer-link" href="#services">Physical Commodity Broking</a>
-      <a class="footer-link" href="#services">Introducing Broking</a>
-      <a class="footer-link" href="#services">Market Research</a>
-      <a class="footer-link" href="#services">Discretionary Advisory</a>
+      <a class="footer-link" href="#" onclick="showSection('services');return false;">Hedging Advisory</a>
+      <a class="footer-link" href="#" onclick="showSection('services');return false;">Physical Commodity Broking</a>
+      <a class="footer-link" href="#" onclick="showSection('services');return false;">Introducing Broking</a>
+      <a class="footer-link" href="#" onclick="showSection('services');return false;">Market Research</a>
+      <a class="footer-link" href="#" onclick="showSection('services');return false;">Discretionary Advisory</a>
     </div>
     <div>
       <div class="footer-col-title">Links</div>
-      <a class="footer-link" href="#about">About James Day</a>
-      <a class="footer-link" href="#contact">Contact</a>
+      <a class="footer-link" href="#" onclick="showSection('about');return false;">About James Day</a>
+      <a class="footer-link" href="#" onclick="showSection('contact');return false;">Contact</a>
       <a class="footer-link" href="https://thebushel.jhdcommodityadvisors.com" target="_blank">The Bushel Platform</a>
       <a class="footer-link" href="YOUR_LINKEDIN_URL_HERE" target="_blank">LinkedIn</a>
     </div>
@@ -1052,6 +1088,20 @@ body {
 </footer>
 
 <script>
+function showSection(name){
+  document.querySelectorAll('.page-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-link').forEach(function(l){ l.classList.remove('active'); });
+  var sec = document.getElementById('section-'+name);
+  if(sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(function(l){
+    if(l.getAttribute('onclick') && l.getAttribute('onclick').indexOf("'"+name+"'") > -1) l.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+
+// Show home on load
+showSection('home');
+
 async function submitContactForm(){
   var fname   = document.getElementById('cf-fname').value.trim();
   var lname   = document.getElementById('cf-lname').value.trim();
