@@ -688,7 +688,7 @@ body {
 
 <!-- ========================= NAV ========================= -->
 <nav class="topnav">
-  <a class="nav-brand" href="#">
+  <a class="nav-brand" href="#" onclick="showSection('home');return false;">
     <img class="nav-logo" src="https://i.ibb.co/PZPZGP71/IMG-2924.jpg" alt="JHD">
     <div>
       <div class="nav-name">JHD <span>Commodity Advisors</span></div>
@@ -832,10 +832,7 @@ body {
 
     <div class="about-grid">
       <div class="about-photo-wrap">
-        <div class="about-photo-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Photo placeholder
-        </div>
+        <img src="https://i.ibb.co/BKZT32Lb/1735798881902.jpg" alt="James Day" style="width:100%;border-radius:12px;display:block;object-fit:cover;aspect-ratio:3/4;background:var(--card2);">
         <div class="about-credential-strip">
           <div class="about-name">James Day</div>
           <div class="about-title-tag">Founder &mdash; JHD Commodity Advisors</div>
@@ -1129,12 +1126,22 @@ async function submitContactForm(){
   btn.textContent = 'Sending...';
 
   try {
-    var resp = await fetch('/.netlify/functions/contact', {
+    var resp = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({fname:fname, lname:lname, email:email, company:company, type:type, message:message})
+      body: JSON.stringify({
+        access_key: '6d11b0aa-c699-4144-a4aa-a8c6c281d06a',
+        subject: 'JHD Website Enquiry' + (type ? ': ' + type : ''),
+        from_name: fname + (lname ? ' ' + lname : ''),
+        email: email,
+        company: company || 'Not provided',
+        enquiry_type: type || 'Not specified',
+        message: message,
+        redirect: false
+      })
     });
-    if(resp.ok){
+    var data = await resp.json();
+    if(resp.ok && data.success){
       msgEl.textContent = 'Message sent. James will be in touch shortly.';
       msgEl.className = 'form-msg ok';
       msgEl.style.display = 'block';
